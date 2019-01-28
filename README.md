@@ -6,6 +6,12 @@
 <ul>Paolo Flores -- paoloflores</ul>
 <ul>Mario Llaque -- Dkad96</ul>
 
+<h2> Grupo Logicas </h2>
+<ul>Katherinne Huancayo -- </ul>
+<ul>Pamela Ore -- pamored</ul>
+<ul>Eduardo Moncada -- edusoldier1</ul>
+<ul>Aldo Shinzato -- </ul>
+
 <p> </p>
 <p> </p>
 
