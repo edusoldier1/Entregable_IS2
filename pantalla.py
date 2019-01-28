@@ -3,7 +3,7 @@ import sys
 
 pygame.font.init()
 
-font = pygame.font.SysFont("Verdana", 28)
+font = pygame.font.SysFont("Verdana", 22)
 font_color = (255,255,255)
 font_background = (0,0,0)
 input_box = pygame.Rect(446,338,226,26)
@@ -85,7 +85,7 @@ class Pantalla:
         
         pygame.draw.rect(self._canvas,font_background,input_box,0)
         txt_surface = font.render(self.text, True, font_color)
-        self._canvas.blit(txt_surface, (input_box.x+5, input_box.y+5))
+        self._canvas.blit(txt_surface, (input_box.x+3, input_box.y+3))
         pygame.display.flip()
     
 class Login(Pantalla):
