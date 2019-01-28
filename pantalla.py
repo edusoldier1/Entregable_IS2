@@ -3,7 +3,7 @@ import sys
 
 pygame.font.init()
 
-font = pygame.font.Font(None, 20)
+font = pygame.font.SysFont("Verdana", 28)
 font_color = (255,255,255)
 font_background = (0,0,0)
 input_box = pygame.Rect(446,338,226,26)
