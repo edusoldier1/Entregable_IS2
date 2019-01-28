@@ -1,6 +1,13 @@
 import pygame
 import sys
 
+pygame.font.init()
+
+font = pygame.font.Font(None, 20)
+font_color = (255,255,255)
+font_background = (0,0,0)
+input_box = pygame.Rect(446,338,226,26)
+
 class Personaje(pygame.sprite.Sprite):
     def __init__(self, imagen):
         pygame.sprite.Sprite.__init__(self)
@@ -13,6 +20,8 @@ class Personaje(pygame.sprite.Sprite):
 
 class Pantalla:
     def __init__(self, canvas):
+        self.active = False
+        self.text = ""
         self.sprites = {}
         self._canvas = canvas
         """self.eventos =	{
@@ -32,8 +41,21 @@ class Pantalla:
                 #self.eventos["Salir"]=True
                 pygame.quit(); sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if x>=imgx and x<=(imgx+ancho) and y>=imgy and y<=(imgy+alto):
+                if input_box.collidepoint(event.pos):
+                    self.active = True
+                elif x>=imgx and x<=(imgx+ancho) and y>=imgy and y<=(imgy+alto):
                     pygame.quit(); sys.exit()
+                else:
+                    self.active = False
+            elif event.type == pygame.KEYDOWN:
+                if self.active:
+                    if event.key == pygame.K_RETURN:
+                        print(self.text)
+                        self.text = ""
+                    elif event.key == pygame.K_BACKSPACE:
+                        self.text = self.text[:-1]
+                    else:
+                        self.text += event.unicode
                # print(self.eventos["Salir"])
             """if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
@@ -60,37 +82,43 @@ class Pantalla:
         for nombre, sprite in self.sprites.items():
             surf = pygame.Surface((sprite.ancho, sprite.alto))
             self._canvas.blit(sprite.image, surf.get_rect(topleft=(sprite.x, sprite.y)))
+        
+        pygame.draw.rect(self._canvas,font_background,input_box,0)
+        txt_surface = font.render(self.text, False, font_color)
+        self._canvas.blit(txt_surface, (input_box.x+5, input_box.y+5))
         pygame.display.flip()
     
-class EjemploPantalla(Pantalla):
+class Login(Pantalla):
     def __init__(self, canvas):
         Pantalla.__init__(self, canvas)
+        coordenadas = {"background":(0,0),
+        "salir": (103,593),
+        "jugar": (469,373),
+        "olvide": (836,509),
+        "registrar": (836,472),
+        "creditos": (836,596)}
+        sprites_img = {}
+        
         #este es el personaje
         #p1 = Personaje("images/personajes/hero/hero1.png")
         #este es el fondo
-        fondo = Personaje("images/fondos/login1.png")
+        sprites_img["background"] = Personaje("images/fondos/background.png")
+
         #botones del login
-        salir = Personaje("images/botones/salir.png")
-        salir.x = 103
-        salir.y = 593
-        jugar = Personaje("images/botones/jugar.png")
-        jugar.x = 469
-        jugar.y = 373
-        olvide = Personaje("images/botones/olvide.png")
-        olvide.x = 836
-        olvide.y = 509
-        registrar = Personaje("images/botones/registrar.png")
-        registrar.x = 836
-        registrar.y = 472
-        creditos = Personaje("images/botones/creditos.png")
-        creditos.x = 836
-        creditos.y = 596
-        self.agregar_sprite("Background",fondo)
-        self.agregar_sprite("Salir",salir)
-        self.agregar_sprite("Jugar",jugar)
-        self.agregar_sprite("Registrar",registrar)
-        self.agregar_sprite("Olvide",olvide)
-        self.agregar_sprite("Creditos",creditos)
+        sprites_img["salir"] = Personaje("images/botones/salir.png")
+
+        sprites_img["jugar"] = Personaje("images/botones/jugar.png")
+
+        sprites_img["olvide"] = Personaje("images/botones/olvide.png")
+
+        sprites_img["registrar"] = Personaje("images/botones/registrar.png")
+
+        sprites_img["creditos"] = Personaje("images/botones/creditos.png")
+        
+        for nombre,sprite in sprites_img.items():
+            sprite.x,sprite.y = coordenadas[nombre]
+            self.agregar_sprite(nombre,sprite)
+
         #self.agregar_sprite("hero1",p1)
         #self.update()
 
