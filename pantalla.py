@@ -84,7 +84,7 @@ class Pantalla:
             self._canvas.blit(sprite.image, surf.get_rect(topleft=(sprite.x, sprite.y)))
         
         pygame.draw.rect(self._canvas,font_background,input_box,0)
-        txt_surface = font.render(self.text, False, font_color)
+        txt_surface = font.render(self.text, True, font_color)
         self._canvas.blit(txt_surface, (input_box.x+5, input_box.y+5))
         pygame.display.flip()
     
