@@ -10,7 +10,7 @@
 <ul>Katherinne Huancayo -- </ul>
 <ul>Pamela Ore -- pamored</ul>
 <ul>Eduardo Moncada -- edusoldier1</ul>
-<ul>Aldo Shinzato -- </ul>
+<ul>Aldo Shinzato -- aldoshinzato</ul>
 
 <p> </p>
 <p> </p>
